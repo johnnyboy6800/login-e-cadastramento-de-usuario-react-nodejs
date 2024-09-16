@@ -43,7 +43,8 @@ sudo apt-get install -y nodejs
 ![Screenshot from 2024-09-16 20-15-25](https://github.com/user-attachments/assets/ee03341f-958f-4a5d-9a96-fb7677dd341f)
 
 # Página de perfil de usuário
-![Screenshot from 2024-09-16 20-16-05](https://github.com/user-attachments/assets/84644455-b950-46c7-8bf0-cbfbcbff87c6)
+![Screenshot from 2024-09-16 20-18-59](https://github.com/user-attachments/assets/f8201061-4bd5-47a6-a965-48e676ebba76)
+
 
 
 
