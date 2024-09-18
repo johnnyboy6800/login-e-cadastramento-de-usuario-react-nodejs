@@ -36,14 +36,16 @@ curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Página de login 100% funcional
-![Screenshot from 2024-09-16 20-12-53](https://github.com/user-attachments/assets/9c0c9b6b-8086-4bb5-aff0-425e4791c509)
-![Screenshot from 2024-09-16 20-14-03](https://github.com/user-attachments/assets/7248b670-8b5e-4379-a9ff-5cebd3e7ac31)
+![Screenshot from 2024-09-18 19-37-41](https://github.com/user-attachments/assets/0a3f4d3d-66a2-418b-9b4f-3584023f8670)
+
 
 # Página de cadastro de usuário
-![Screenshot from 2024-09-16 20-15-25](https://github.com/user-attachments/assets/ee03341f-958f-4a5d-9a96-fb7677dd341f)
+![Screenshot from 2024-09-18 19-38-37](https://github.com/user-attachments/assets/af77e1e9-b754-4438-8527-31ff1df83777)
+
 
 # Página de perfil de usuário
-![Screenshot from 2024-09-16 20-18-59](https://github.com/user-attachments/assets/f8201061-4bd5-47a6-a965-48e676ebba76)
+![Screenshot from 2024-09-18 19-38-14](https://github.com/user-attachments/assets/d966fec9-717e-4f71-a7ed-0e36ae6f6a70)
+
 
 
 
