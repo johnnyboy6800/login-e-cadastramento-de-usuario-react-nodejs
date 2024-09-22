@@ -24,33 +24,46 @@ app.get('login', (req, res) => {
 */
 
 app.post('/cadastro', (req, res) => {
-  const datac = [req.body.cnome, req.body.cemail, req.body.csenha]
-  const ins = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?); "
   
-  db.query(ins, datac, (err, data) => {
-    if (err) return res.json("error, houve um erro durante o cadastro");
-    else {
-      return res.json("cadastramento realizado com sucesso")
+  const lsenha = req.body.csenha;
+  const lemail = req.body.cemail;
+  const email = "select * from usuarios where email = (?)"
+  const saltRounds = 10;
+  
+  db.query(email, [req.body.cemail], (err, result) => {
+    if (err) {
+        return res.json({ success: false, message: "Erro ao verificar email." });
     }
-    
-  })
-
+    if (result.length > 0) {
+        // Se o email já existe
+        return res.json({ success: false, message: "Usuário já existente." });
+    } else {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+          if (err){
+            return res.json({message: "ocorreu um erro no gensalt"})
+          } else {
+            return console.log("salt gen realizado")
+          }
+          });
+        bcrypt.hash(lsenha, saltRounds, (err, hash) => {
+          if (err){
+            return res.json({message: "erro durante o hashing"})
+          } 
+          console.log("hashing realizado com sucesso")
+          const ins = "insert into usuarios (nome, email, senha) values (?, ?, ?);"
+          const dados= [req.body.cnome, req.body.cemail, hash]
+          db.query(ins, dados, (err, result) => {
+            if (err) {
+                return res.json({ success: false, message: "Erro ao cadastrar usuário." });
+            }
+            return res.json({ success: true, message: "Cadastro realizado com sucesso!" });
+        });
+        })  
+    }
+});
 });
 
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) return res.sendStatus(401); // Sem token, acesso não autorizado
-
-  // Verifica o token
-  jwt.verify(token, 'token', (err, user) => {
-      if (err) return res.sendStatus(403); // Token inválido
-
-      req.userId = user.id; // O ID do usuário agora está disponível na requisição
-      next();
-  });
-}
 
 
 app.post('/login', (req, res) =>  {
