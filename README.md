@@ -46,6 +46,46 @@ sudo apt-get install -y nodejs
 # Página de perfil de usuário
 ![Screenshot from 2024-09-18 19-38-14](https://github.com/user-attachments/assets/d966fec9-717e-4f71-a7ed-0e36ae6f6a70)
 
+# Password encryption usando bcrypt
+```
+  db.query(email, [req.body.cemail], (err, result) => {
+    if (err) {
+        return res.json({ success: false, message: "Erro ao verificar email." });
+    }
+    if (result.length > 0) {
+        // Se o email já existe
+        return res.json({ success: false, message: "Usuário já existente." });
+    } else {
+        
+        bcrypt.genSalt(saltRounds, (err, salt) => {     // geração de salt
+          if (err){
+            return res.json({message: "ocorreu um erro no gensalt"})
+          } else {
+            return console.log("salt gen realizado")
+          }
+          });
+        bcrypt.hash(lsenha, saltRounds, (err, hash) => {    // password hashing
+          if (err){
+            return res.json({message: "erro durante o hashing"})
+          } 
+          console.log("hashing realizado com sucesso")
+          const ins = "insert into usuarios (nome, email, senha) values (?, ?, ?);"
+          const dados= [req.body.cnome, req.body.cemail, hash]
+          db.query(ins, dados, (err, result) => {
+            if (err) {
+                return res.json({ success: false, message: "Erro ao cadastrar usuário." });
+            }
+            return res.json({ success: true, message: "Cadastro realizado com sucesso!" });
+        });
+        })  
+    }
+});
+});
+
+```
+
+Resultado final:  
+![Screenshot from 2024-09-22 19-08-42](https://github.com/user-attachments/assets/41328ad5-68d0-4c19-b1fd-23f878b2c59a)
 
 
 
